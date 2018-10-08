@@ -11,10 +11,14 @@
       <div class="more">
         <span class="price" v-html="currency"></span>
       </div>
-      <div class="getIt" @click.stop="purchased">
+      <a
+        :href="product.link"
+        @click.stop=""
+        target="_blank"
+        class="getIt">
         GET IT
         <img src="../../assets/gettIt.png">
-      </div>
+      </a>
     </div>
     <img
       class="productEye"
@@ -158,7 +162,8 @@ span {
   color: white;
   padding: 0 0.7em;
   line-height: 2em;
-  cursor: pointer;
+  /* cursor: pointer; */
+  text-decoration: none;
 }
 
 .getIt img {

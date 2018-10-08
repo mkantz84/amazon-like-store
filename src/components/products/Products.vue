@@ -46,6 +46,7 @@ export default {
     });
     eventBus.$on("refineSearch", val => {
       that.iterations = 1;
+      that.showOpacity = false;
       if (!val) {
         that.initProducts();
       } else {
@@ -53,6 +54,16 @@ export default {
           elm => elm.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         );
       }
+    });
+    eventBus.$on("searchDeals", () => {
+      that.products.sort(
+        (a, b) =>
+          a.listPrice > b.listPrice || a.listPrice === ""
+            ? 1
+            : b.listPrice > a.listPrice || b.listPrice === ""
+              ? -1
+              : 0
+      );
     });
   }
 };

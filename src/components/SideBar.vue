@@ -7,7 +7,7 @@
         placeholder="SEARCH FOR..."
         v-model.lazy="searchFor"><br>
       <button>CATEGORIES</button><br>
-      <button>HOTTEST DEALS</button><br>
+      <button @click="searchDeals">HOTTEST DEALS</button><br>
       <button>REFINE SEARCH</button>
     </div>
   </div>
@@ -25,7 +25,13 @@ export default {
 
   watch: {
     searchFor(value) {
-      eventBus.$emit('refineSearch', value);
+      eventBus.$emit('refineSearch', value.trim());
+    }
+  },
+
+  methods: {
+    searchDeals() {
+      eventBus.$emit('searchDeals');
     }
   }
 }

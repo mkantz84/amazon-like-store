@@ -5,7 +5,8 @@
         v-for="product in products.slice(0, 8 * iterations)"
         :key="product.id"
         :product="product"
-        @showOpac="showOpacity = $event"></app-product><br><br>
+        @showOpac="showOpacity = $event"></app-product>
+      <br><br>
       <button
         class="more"
         @click="iterations++"
@@ -58,7 +59,7 @@ export default {
       if (!val) {
         this.initProducts();
       } else {
-        this.products = this.products.filter(
+        this.products = productsData.filter(
           elm => elm.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         );
       }

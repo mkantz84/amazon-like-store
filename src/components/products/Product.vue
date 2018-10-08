@@ -102,7 +102,7 @@ export default {
   max-width: 100%;
   margin: auto;
   position: absolute;
-  bottom: 0;
+  bottom: 0.2em;
   left: 0;
   right: 0;
 }

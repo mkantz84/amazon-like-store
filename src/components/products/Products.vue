@@ -6,7 +6,10 @@
         :key="product.id"
         :product="product"
         @showOpac="showOpacity = $event"></app-product><br><br>
-      <button class="more" @click="iterations++">
+      <button
+        class="more"
+        @click="iterations++"
+        v-if="products.length > 8 * iterations">
         MORE
         <img src="../../assets/more.png">
       </button>
@@ -62,7 +65,11 @@ export default {
             ? 1
             : b.listPrice > a.listPrice || b.listPrice === ""
               ? -1
-              : 0
+              : a.price > b.price || a.price === ""
+                ? 1
+                : b.price > a.price || b.price === ""
+                  ? -1
+                  : 0
       );
     });
   }

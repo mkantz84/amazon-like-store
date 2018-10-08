@@ -39,27 +39,32 @@ export default {
   methods: {
     initProducts() {
       this.products = productsData;
-    }
-  },
-
-  created() {
-    var that = this;
-    eventBus.$on("initProducts", () => {
-      this.initProducts();
-    });
-    eventBus.$on("refineSearch", val => {
-      that.iterations = 1;
-      that.showOpacity = false;
+    },
+    factoryFilterSearch(filter, options) {
+      switch (filter) {
+        case 'byName':
+          this.filterByName(options.name);
+          break;
+        case 'deals':
+          this.sortDeals();
+          break;
+        default:
+          break;
+      }
+    },
+    filterByName(val) {
+      this.iterations = 1;
+      this.showOpacity = false;
       if (!val) {
-        that.initProducts();
+        this.initProducts();
       } else {
-        that.products = that.products.filter(
+        this.products = this.products.filter(
           elm => elm.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         );
       }
-    });
-    eventBus.$on("searchDeals", () => {
-      that.products.sort(
+    },
+    sortDeals() {
+      this.products.sort(
         (a, b) =>
           a.listPrice > b.listPrice || a.listPrice === ""
             ? 1
@@ -71,6 +76,21 @@ export default {
                   ? -1
                   : 0
       );
+    }
+  },
+
+  created() {
+    var that = this;
+    const options={};
+    eventBus.$on("initProducts", () => {
+      this.initProducts();
+    });
+    eventBus.$on("refineSearch", val => {
+      options.name = val;
+      that.factoryFilterSearch('byName', options);
+    });
+    eventBus.$on("searchDeals", () => {
+      that.factoryFilterSearch('deals');
     });
   }
 };

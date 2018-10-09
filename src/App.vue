@@ -38,4 +38,22 @@ export default {
     color: white;
     cursor: pointer;
   }
+
+  .slider-handle {
+    background-color: #ff7a72;
+    color: #ff7a72;
+    background-image: unset;
+  }
+
+  .tooltip {
+    display: none;
+  }
+
+  .slider.slider-horizontal {
+    width: 60%;
+  }
+
+  .d-inline-block {
+    padding: 0.5em 0 0.5em 4%;
+  }
 </style>

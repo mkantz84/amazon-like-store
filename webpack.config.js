@@ -41,7 +41,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      "jquery": path.join(__dirname, "./jquery-stub.js")
     },
     extensions: ['*', '.js', '.vue', '.json']
   },

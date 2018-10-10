@@ -4,12 +4,11 @@
       <strong>PRICE</strong>
       <b-form-slider
         v-model="rangeValue"
-        range :min="0" :max="1500"
-        @change="change">
+        range :min="0" :max="1500">
       </b-form-slider>
       <span>{{ rangeValue[0] }}</span>
       <span style="float: right;margin-right: 32%;">{{ rangeValue[1] }}</span>
-      <button>GO</button>
+      <button @click="refinSearch">GO</button>
     </div>
 
     <div class="condition">
@@ -48,15 +47,39 @@
 </template>
 
 <script>
+import { eventBus } from "../../main.js";
 import { bFormSlider } from "vue-bootstrap-slider";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
+
 export default {
+  props:['name'],
+
   data() {
     return {
       rangeValue: [0, 1500],
       condition: "",
       shipping: false
     };
+  },
+
+  watch: {
+    condition() {
+      this.refinSearch();
+    },
+    shipping() {
+      this.refinSearch();
+    }
+  },
+
+  methods: {
+    refinSearch() {
+      const options = {};
+      options.condition = this.condition.toLowerCase();
+      options.name = this.name.toLowerCase();
+      options.shipping = this.shipping;
+      options.priceRange = this.rangeValue;
+      eventBus.$emit("refinSearch", options);
+    }
   },
 
   components: {

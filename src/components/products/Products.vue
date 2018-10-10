@@ -43,11 +43,14 @@ export default {
     },
     factoryFilterSearch(filter, options) {
       switch (filter) {
-        case 'byName':
+        case "byName":
           this.filterByName(options.name);
           break;
-        case 'deals':
+        case "deals":
           this.sortDeals();
+          break;
+        case "refinSearch":
+          this.refinSearch(options);
           break;
         default:
           break;
@@ -77,21 +80,52 @@ export default {
                   ? -1
                   : 0
       );
+    },
+    filterByCondition(condition) {
+      if(condition){
+        this.products = this.products.filter(
+          elm => elm.condition.toLowerCase() === condition
+        );
+      }
+    },
+    filterByShipping(isFreeShipping) {
+      if (isFreeShipping) {
+        this.products = this.products.filter(
+          elm => !elm.shippingCost
+        );
+      }
+    },
+    filterByPriceRange(priceRange) {
+      this.products = this.products.filter(
+        elm => elm.price >= priceRange[0] && elm.price <= priceRange[1]
+      );
+    },
+
+    refinSearch(options) {
+      this.filterByName(options.name);
+      this.filterByCondition(options.condition);
+      this.filterByShipping(options.shipping);
+      this.filterByPriceRange(options.priceRange);
     }
   },
 
   created() {
     var that = this;
-    const options={};
+    const options = {};
     eventBus.$on("initProducts", () => {
       this.initProducts();
     });
-    eventBus.$on("refineSearch", val => {
-      options.name = val;
-      that.factoryFilterSearch('byName', options);
+    eventBus.$on("searchName", name => {
+      options.name = name;
+      that.factoryFilterSearch("byName", options);
     });
     eventBus.$on("searchDeals", () => {
-      that.factoryFilterSearch('deals');
+      that.factoryFilterSearch("deals");
+    });
+    eventBus.$on("refinSearch", options => {
+      // options.condition = options.condition;
+      // options.name = options.name;
+      that.factoryFilterSearch("refinSearch", options);
     });
   }
 };

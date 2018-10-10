@@ -16,7 +16,9 @@
         :class="{showRefineDiv: showMoreFilters}">
         <button>REFINE SEARCH</button>
       </div>
-      <app-refine-search v-if="showMoreFilters"></app-refine-search>
+      <app-refine-search
+        v-if="showMoreFilters"
+        :name="searchFor"></app-refine-search>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
 
   watch: {
     searchFor(value) {
-      eventBus.$emit("refineSearch", value.trim());
+      eventBus.$emit("searchName", value.trim());
     }
   },
 

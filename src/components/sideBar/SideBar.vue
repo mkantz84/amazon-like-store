@@ -105,7 +105,7 @@ input[type="text"] {
 
 .refine:hover,
 .showRefineDiv {
-  background: url(/dist/refine.png?fd815ed…) no-repeat top left #3e6074;
+  background: url('../../assets/refine.png') no-repeat top left #3e6074;
   background-size: contain;
   background-position: 18%;
   padding-left: 26%;

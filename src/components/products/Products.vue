@@ -123,8 +123,6 @@ export default {
       that.factoryFilterSearch("deals");
     });
     eventBus.$on("refinSearch", options => {
-      // options.condition = options.condition;
-      // options.name = options.name;
       that.factoryFilterSearch("refinSearch", options);
     });
   }

@@ -73,11 +73,12 @@ export default {
 
   methods: {
     refinSearch() {
-      const options = {};
-      options.condition = this.condition.toLowerCase();
-      options.name = this.name.toLowerCase();
-      options.shipping = this.shipping;
-      options.priceRange = this.rangeValue;
+      const options = {
+        condition: this.condition.toLowerCase(),
+        name: this.name.toLowerCase(),
+        shipping: this.shipping,
+        priceRange: this.rangeValue
+      };
       eventBus.$emit("refinSearch", options);
     }
   },

@@ -8,7 +8,7 @@
       </b-form-slider>
       <span>{{ rangeValue[0] }}</span>
       <span style="float: right;margin-right: 32%;">{{ rangeValue[1] }}</span>
-      <button @click="refinSearch">GO</button>
+      <button @click="refinSearch">GO!</button>
     </div>
 
     <div class="condition">

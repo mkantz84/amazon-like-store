@@ -16,9 +16,13 @@
         :class="{showRefineDiv: showMoreFilters}">
         <button>REFINE SEARCH</button>
       </div>
-      <app-refine-search
-        v-if="showMoreFilters"
-        :name="searchFor"></app-refine-search>
+      <transition name="fade">
+        <app-refine-search
+          v-if="showMoreFilters"
+          :name="searchFor">
+        </app-refine-search>
+      </transition>
+
     </div>
   </div>
 </template>
@@ -105,6 +109,22 @@ input[type="text"] {
   background-size: contain;
   background-position: 18%;
   padding-left: 26%;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+
+  /*option for slider:
+  overflow-y: hidden;
+	max-height: 500px;
+	transition-property: all;
+	transition-duration: .5s; */
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+
+  /*option for slider:
+   max-height: 0; */
 }
 </style>
 

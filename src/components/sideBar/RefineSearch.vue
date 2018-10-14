@@ -63,6 +63,7 @@ export default {
   },
 
   watch: {
+    // whenever we change one of those data inputs, we'll trigger the refineSearch method:
     condition() {
       this.refinSearch();
     },
@@ -73,6 +74,7 @@ export default {
 
   methods: {
     refinSearch() {
+      // getting all the data to an object and passing it via eventBus to the products component:
       const options = {
         condition: this.condition.toLowerCase(),
         name: this.name.toLowerCase(),

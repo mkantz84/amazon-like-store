@@ -7,6 +7,8 @@
         :product="product"
         @showOpac="showOpacity = $event"></app-product>
       <br><br>
+      <!-- each time we click this button, we adding 1 to the iteration,
+      thus showing more products from the products array: -->
       <button
         class="more"
         @click="iterations++"
@@ -15,6 +17,7 @@
         <img src="../../assets/more.png">
       </button>
     </div>
+    <!-- this div will cover with an opacity all the products div -->
     <div v-if="showOpacity" class="opac"></div>
   </div>
 </template>
@@ -39,8 +42,10 @@ export default {
 
   methods: {
     initProducts() {
+      // get all the products from data.js
       this.products = productsData;
     },
+
     factoryFilterSearch(filter, options) {
       switch (filter) {
         case "byName":
@@ -56,6 +61,7 @@ export default {
           break;
       }
     },
+
     filterByName(val) {
       this.iterations = 1;
       this.showOpacity = false;
@@ -66,6 +72,7 @@ export default {
           elm => elm.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         );
       }
+      return this;  //support chaining
     },
     sortDeals() {
       this.products.sort(
@@ -87,6 +94,7 @@ export default {
           elm => elm.condition.toLowerCase() === condition
         );
       }
+      return this;  //support chaining
     },
     filterByShipping(isFreeShipping) {
       if (isFreeShipping) {
@@ -94,18 +102,20 @@ export default {
           elm => !elm.shippingCost
         );
       }
+      return this;  //support chaining
     },
     filterByPriceRange(priceRange) {
       this.products = this.products.filter(
         elm => elm.price >= priceRange[0] && elm.price <= priceRange[1]
       );
+      return this;  //support chaining
     },
 
     refinSearch(options) {
-      this.filterByName(options.name);
-      this.filterByCondition(options.condition);
-      this.filterByShipping(options.shipping);
-      this.filterByPriceRange(options.priceRange);
+      this.filterByName(options.name)
+        .filterByCondition(options.condition)
+          .filterByShipping(options.shipping)
+            .filterByPriceRange(options.priceRange);
     }
   },
 

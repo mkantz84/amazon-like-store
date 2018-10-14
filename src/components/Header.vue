@@ -2,6 +2,7 @@
   <div class="header">
     <img src="../assets/header.png">
     <div class="navs">
+      <!-- dont do nothing at the momment -->
       <button>ABOUT</button>
       <button>SERVICES</button>
       <button>CONTACT</button>

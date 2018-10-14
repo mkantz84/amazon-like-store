@@ -6,9 +6,12 @@
         type="text"
         placeholder="SEARCH FOR..."
         v-model.lazy="searchFor"><br>
+      <!-- not supported -->
       <button>CATEGORIES</button><br>
+      <!-- filter the products by the lowest price-lict or the lower price -->
       <button @click="searchDeals">HOTTEST DEALS</button><br>
     </div>
+
     <div>
       <div
         @click="showMoreFilters = !showMoreFilters"
@@ -22,7 +25,6 @@
           :name="searchFor">
         </app-refine-search>
       </transition>
-
     </div>
   </div>
 </template>
@@ -114,8 +116,8 @@ input[type="text"] {
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 
-  /*option for slider:
-  overflow-y: hidden;
+  /* option for slider: */
+  /*overflow-y: hidden;
 	max-height: 500px;
 	transition-property: all;
 	transition-duration: .5s; */
@@ -123,8 +125,8 @@ input[type="text"] {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 
-  /*option for slider:
-   max-height: 0; */
+  /* option for slider: */
+  /* max-height: 0; */
 }
 </style>
 
